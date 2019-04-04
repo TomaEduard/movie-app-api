@@ -30,6 +30,8 @@ public class MovieServiceIntegrationTests {
 
         // Make sure the product does not have null values
         assertThat(movie, notNullValue());
+        assertThat(movie.getRating(), notNullValue());
+        assertThat(movie.getRating(), greaterThan(0.0));
         assertThat(movie.getId(), greaterThan(0L));
     }
 }
