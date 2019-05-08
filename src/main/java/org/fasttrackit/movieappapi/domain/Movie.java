@@ -18,6 +18,9 @@ public class Movie {
     @Size(min = 1, max = 300)
     private String name;
     private double rating;
+    private boolean favorite;
+    private boolean watchlist;
+    private boolean playlist;
 
     public long getId() {
         return id;
@@ -41,5 +44,29 @@ public class Movie {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isWatchlist() {
+        return watchlist;
+    }
+
+    public void setWatchlist(boolean watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    public boolean isPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(boolean playlist) {
+        this.playlist = playlist;
     }
 }
