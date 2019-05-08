@@ -30,10 +30,10 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-//    public Movie getMovie(long id) throws Exception {
-//        LOGGER.info("Retriving product {}", id );
-//        return movieRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Product" + id + "Resource not found"));
-//    }
+    public Movie getMovie(long id) throws Exception {
+        LOGGER.info("Retriving product {}", id );
+        return movieRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product" + id + "Resource not found"));
+    }
 
 }

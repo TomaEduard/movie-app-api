@@ -1,6 +1,5 @@
 package org.fasttrackit.movieappapi.exception;
 
-//  Nu poti crea o clasa ApplicationException pentru ca este o clasa abstracta
 public abstract class ApplicationException extends Exception {
 
     private String code;

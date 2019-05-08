@@ -69,4 +69,5 @@ public class Movie {
     public void setPlaylist(boolean playlist) {
         this.playlist = playlist;
     }
+
 }
