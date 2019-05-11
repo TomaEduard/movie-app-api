@@ -1,12 +1,22 @@
-package org.fasttrackit.movieappapi.transfer;
+package org.fasttrackit.movieappapi.transfer.movie;
 
 public class CreateMovieRequest {
 
+    private long id;
     private String name;
     private double rating;
     private boolean favorite;
     private boolean watchlist;
     private boolean playlist;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -51,7 +61,8 @@ public class CreateMovieRequest {
     @Override
     public String toString() {
         return "CreateMovieRequest{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", rating=" + rating +
                 ", favorite=" + favorite +
                 ", watchlist=" + watchlist +
