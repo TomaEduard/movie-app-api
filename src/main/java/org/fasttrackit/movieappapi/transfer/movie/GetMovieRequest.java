@@ -1,14 +1,13 @@
 package org.fasttrackit.movieappapi.transfer.movie;
 
-public class CreateMovieRequest {
+public class GetMovieRequest {
 
     private long id;
-    private String name;
-    private double rating;
-    private boolean favorite;
-    private boolean watchlist;
-    private boolean playlist;
-
+    private String partialName;
+    private Double rating;
+    private Boolean favorite;
+    private Boolean watchlist;
+    private Boolean playlist;
 
     public long getId() {
         return id;
@@ -18,51 +17,51 @@ public class CreateMovieRequest {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPartialName() {
+        return partialName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPartialName(String partialName) {
+        this.partialName = partialName;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
-    public boolean isFavorite() {
+    public Boolean getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(boolean favorite) {
+    public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
     }
 
-    public boolean isWatchlist() {
+    public Boolean getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(boolean watchlist) {
+    public void setWatchlist(Boolean watchlist) {
         this.watchlist = watchlist;
     }
 
-    public boolean isPlaylist() {
+    public Boolean getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(boolean playlist) {
+    public void setPlaylist(Boolean playlist) {
         this.playlist = playlist;
     }
 
     @Override
     public String toString() {
-        return "CreateMovieRequest{" +
+        return "GetMovieRequest{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", partialName='" + partialName + '\'' +
                 ", rating=" + rating +
                 ", favorite=" + favorite +
                 ", watchlist=" + watchlist +
