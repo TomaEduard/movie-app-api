@@ -57,63 +57,63 @@ public class MovieService {
         LOGGER.info("Retriving movie >> {}", request );
         // name                                 1
         if (request.getPartialName() != null) {
-            movieRepository.findByNameContaining(request.getPartialName(), pageable);
+            return movieRepository.findByNameContaining(request.getPartialName(), pageable);
         // favorite                             2
         } else if (request.getFavorite() != null) {
-            movieRepository.findByFavoriteTrue(pageable);
+            return movieRepository.findByFavoriteTrue(pageable);
         // rating                               3
         } else if (request.getRating() != null) {
-            movieRepository.findByRatingGreaterThanEqual(request.getRating(), pageable);
+            return movieRepository.findByRatingGreaterThanEqual(request.getRating(), pageable);
         // watchlist                            4
         } else if (request.getWatchlist() != null) {
-            movieRepository.findByWatchlistTrue(pageable);
+            return movieRepository.findByWatchlistTrue(pageable);
         // name + favorite                      5
         } else if (request.getPartialName() != null &&
                     request.getFavorite() != null) {
-            movieRepository.findByNameContainingAndFavoriteIsTrue(request.getPartialName(), pageable);
+            return movieRepository.findByNameContainingAndFavoriteIsTrue(request.getPartialName(), pageable);
         // name + rating                        6
         } else if (request.getPartialName() != null &&
                 request.getRating() != null) {
-            movieRepository.findByNameContainingAndRatingGreaterThanEqual(request.getPartialName(), request.getRating(), pageable);
+            return movieRepository.findByNameContainingAndRatingGreaterThanEqual(request.getPartialName(), request.getRating(), pageable);
         // name + watchlist                     7
         } else if (request.getPartialName() != null &&
                      request.getWatchlist() != null) {
-            movieRepository.findByNameContainingAndWatchlistTrue(request.getPartialName(), pageable);
+            return movieRepository.findByNameContainingAndWatchlistTrue(request.getPartialName(), pageable);
         // favorite + rating                    8
         } else if (request.getFavorite() != null &&
                     request.getRating() != null) {
-            movieRepository.findByFavoriteTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
+            return movieRepository.findByFavoriteTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
         // favorite + watchlist                 9
         } else if (request.getFavorite() != null &&
                   request.getWatchlist() != null) {
-            movieRepository.findByFavoriteTrueAndWatchlistTrue(pageable);
+            return movieRepository.findByFavoriteTrueAndWatchlistTrue(pageable);
         // rating + watchlist                  10
         } else if (request.getRating() != null &&
                     request.getWatchlist() != null) {
-            movieRepository.findByWatchlistIsTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
+            return movieRepository.findByWatchlistIsTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
         // name + favorite + rating            11
         } else if (request.getPartialName() != null &&
                     request.getFavorite() != null &&
                     request.getRating() != null) {
-            movieRepository.findByRatingGreaterThanEqualAndFavoriteTrueAndNameContaining(
+            return movieRepository.findByRatingGreaterThanEqualAndFavoriteTrueAndNameContaining(
                     request.getRating(), request.getPartialName(),  pageable);
         // name + favorite + watchlist         12
         } else if (request.getPartialName() != null &&
                     request.getFavorite() !=null &&
                     request.getWatchlist() !=null) {
-            movieRepository.findByNameContainingAndFavoriteIsTrueAndWatchlistIsTrue(
+            return movieRepository.findByNameContainingAndFavoriteIsTrueAndWatchlistIsTrue(
                     request.getPartialName(), pageable);
         // name + rating + watchlist       13
         } else if (request.getPartialName() != null &&
                 request.getRating() !=null &&
                 request.getWatchlist() !=null) {
-            movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndNameContaining(
-                    request.getPartialName(), request.getRating(), pageable);
+            return movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndNameContaining(
+                     request.getRating(), request.getPartialName(), pageable);
         // favorite + rating + watchlist       14
         } else if (request.getFavorite() != null &&
                 request.getRating() !=null &&
                 request.getWatchlist() !=null) {
-            movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndFavoriteTrue(
+            return movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndFavoriteTrue(
                     request.getRating(), pageable);
         }
         // name + favorite + rating + watchlist 15
@@ -121,7 +121,7 @@ public class MovieService {
                     request.getFavorite() != null &&
                     request.getRating() != null &&
                     request.getWatchlist() != null) {
-            movieRepository.findByNameContainingAndFavoriteTrueAndRatingGreaterThanEqualAndWatchlistTrue(
+            return movieRepository.findByNameContainingAndFavoriteTrueAndRatingGreaterThanEqualAndWatchlistTrue(
                     request.getPartialName(), request.getRating(), pageable);
         }
 
