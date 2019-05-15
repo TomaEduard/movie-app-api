@@ -4,7 +4,10 @@ import org.fasttrackit.movieappapi.domain.Movie;
 import org.fasttrackit.movieappapi.exception.ResourceNotFoundException;
 import org.fasttrackit.movieappapi.service.MovieService;
 import org.fasttrackit.movieappapi.transfer.movie.CreateUpdateMovieRequest;
+import org.fasttrackit.movieappapi.transfer.movie.GetMovieRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +18,38 @@ import javax.validation.Valid;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private final MovieService productService;
+    private final MovieService movieService;
 
     @Autowired
-    public MovieController(MovieService productService) {
-        this.productService = productService;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    // ge only 1 movie with id
+    // get only 1 movie with id
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable("id") long id) throws Exception {
-        Movie response = productService.getMovie(id);
+        Movie response = movieService.getMovie(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // get objects from db  depending on what fields are completed
+    @GetMapping
+    public ResponseEntity<Page<Movie>> getMovies(
+            @Valid GetMovieRequest request, Pageable pageable) {
+        Page<Movie> response = movieService.getMovies(request, pageable);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // create and delete
     @PostMapping
     public ResponseEntity<Movie> createMovie(@RequestBody @Valid CreateUpdateMovieRequest request) throws ResourceNotFoundException {
-        Movie response = productService.createUpdateMovie(request);
+        Movie response = movieService.createUpdateMovie(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteProduct(@PathVariable("id") long id) {
-        productService.deleteMovie(id);
+        movieService.deleteMovie(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
