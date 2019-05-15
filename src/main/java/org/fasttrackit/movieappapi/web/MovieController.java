@@ -22,17 +22,24 @@ public class MovieController {
         this.productService = productService;
     }
 
-    @GetMapping("id")
+    // ge only 1 movie with id
+    @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable("id") long id) throws Exception {
         Movie response = productService.getMovie(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // create and delete
     @PostMapping
     public ResponseEntity<Movie> createMovie(@RequestBody @Valid CreateUpdateMovieRequest request) throws ResourceNotFoundException {
         Movie response = productService.createUpdateMovie(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteProduct(@PathVariable("id") long id) {
+        productService.deleteMovie(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
 }

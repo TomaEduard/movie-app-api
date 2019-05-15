@@ -10,9 +10,6 @@ import javax.validation.constraints.Size;
 
 // Long is wrapper class for primitive long
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
-
-
-
 //    Name
     Page<Movie> findByNameContaining(@NotNull @Size(min = 1, max = 300) String name, Pageable pageable);
 //    Name + Favorite
@@ -21,6 +18,8 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     Page<Movie> findByNameContainingAndRatingGreaterThanEqual(String name, double rating, Pageable pageable);
 //    Name + Watchlist
     Page<Movie> findByNameContainingAndWatchlistTrue(String name, Pageable pageable);
+//    Name + Favorite + Watchlist
+    Page<Movie> findByNameContainingAndFavoriteIsTrueAndWatchlistIsTrue(String name, Pageable pageable);
 
 //    Favorite
     Page<Movie> findByFavoriteTrue(Pageable pageable);
@@ -36,24 +35,20 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
         (double rating, String name, Pageable pageable);
 //    Rating + Watchlist + Name
         Page<Movie> findByRatingGreaterThanEqualAndWatchlistTrueAndNameContaining(
-                double rating, String name, Pageable pageable);
+                String name, double rating, Pageable pageable);
 //    Rating + Watchlist + Favorite
         Page<Movie> findByRatingGreaterThanEqualAndWatchlistTrueAndFavoriteTrue(double rating, Pageable pageable);
 
-
-    //    Watchlist
+//    Watchlist
     Page<Movie> findByWatchlistTrue(Pageable pageable);
-    //    Watchlist + Rating
+//    Watchlist + Rating
     Page<Movie> findByWatchlistIsTrueAndRatingGreaterThanEqual(double rating, Pageable pageable);
-
 
 //    Name + Favorite + Rating + Watchlist
     Page<Movie> findByNameContainingAndFavoriteTrueAndRatingGreaterThanEqualAndWatchlistTrue(
             String name, double rating, Pageable pageabe);
 
-
-
-    //    Playlist
+//    Playlist
     Page<Movie> findByPlaylistTrue(Pageable pageable);
 
 

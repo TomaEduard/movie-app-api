@@ -46,29 +46,78 @@ public class MovieService {
 
             return movieRepository.save(movie);
         } else {
+            // if the id not exist in db, cr8 new object with request id
             LOGGER.info("Creating movie {}", request);
             Movie movie = objectMapper.convertValue(request, Movie.class);
             return movieRepository.save(movie);
         }
     }
 
-
     public Page<Movie> getMovies(GetMovieRequest request, Pageable pageable) {
         LOGGER.info("Retriving movie >> {}", request );
-
+        // name                                 1
         if (request.getPartialName() != null) {
             movieRepository.findByNameContaining(request.getPartialName(), pageable);
-
+        // favorite                             2
         } else if (request.getFavorite() != null) {
             movieRepository.findByFavoriteTrue(pageable);
-
+        // rating                               3
         } else if (request.getRating() != null) {
             movieRepository.findByRatingGreaterThanEqual(request.getRating(), pageable);
-
+        // watchlist                            4
         } else if (request.getWatchlist() != null) {
             movieRepository.findByWatchlistTrue(pageable);
-
+        // name + favorite                      5
         } else if (request.getPartialName() != null &&
+                    request.getFavorite() != null) {
+            movieRepository.findByNameContainingAndFavoriteIsTrue(request.getPartialName(), pageable);
+        // name + rating                        6
+        } else if (request.getPartialName() != null &&
+                request.getRating() != null) {
+            movieRepository.findByNameContainingAndRatingGreaterThanEqual(request.getPartialName(), request.getRating(), pageable);
+        // name + watchlist                     7
+        } else if (request.getPartialName() != null &&
+                     request.getWatchlist() != null) {
+            movieRepository.findByNameContainingAndWatchlistTrue(request.getPartialName(), pageable);
+        // favorite + rating                    8
+        } else if (request.getFavorite() != null &&
+                    request.getRating() != null) {
+            movieRepository.findByFavoriteTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
+        // favorite + watchlist                 9
+        } else if (request.getFavorite() != null &&
+                  request.getWatchlist() != null) {
+            movieRepository.findByFavoriteTrueAndWatchlistTrue(pageable);
+        // rating + watchlist                  10
+        } else if (request.getRating() != null &&
+                    request.getWatchlist() != null) {
+            movieRepository.findByWatchlistIsTrueAndRatingGreaterThanEqual(request.getRating(), pageable);
+        // name + favorite + rating            11
+        } else if (request.getPartialName() != null &&
+                    request.getFavorite() != null &&
+                    request.getRating() != null) {
+            movieRepository.findByRatingGreaterThanEqualAndFavoriteTrueAndNameContaining(
+                    request.getRating(), request.getPartialName(),  pageable);
+        // name + favorite + watchlist         12
+        } else if (request.getPartialName() != null &&
+                    request.getFavorite() !=null &&
+                    request.getWatchlist() !=null) {
+            movieRepository.findByNameContainingAndFavoriteIsTrueAndWatchlistIsTrue(
+                    request.getPartialName(), pageable);
+        // name + rating + watchlist       13
+        } else if (request.getPartialName() != null &&
+                request.getRating() !=null &&
+                request.getWatchlist() !=null) {
+            movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndNameContaining(
+                    request.getPartialName(), request.getRating(), pageable);
+        // favorite + rating + watchlist       14
+        } else if (request.getFavorite() != null &&
+                request.getRating() !=null &&
+                request.getWatchlist() !=null) {
+            movieRepository.findByRatingGreaterThanEqualAndWatchlistTrueAndFavoriteTrue(
+                    request.getRating(), pageable);
+        }
+        // name + favorite + rating + watchlist 15
+         else if (request.getPartialName() != null &&
                     request.getFavorite() != null &&
                     request.getRating() != null &&
                     request.getWatchlist() != null) {
@@ -76,6 +125,7 @@ public class MovieService {
                     request.getPartialName(), request.getRating(), pageable);
         }
 
+        // any field completed
         return movieRepository.findAll(pageable);
     }
 
@@ -86,8 +136,14 @@ public class MovieService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product" + id + "Resource not found"));
     }
 
+    public void deleteMovie(long id) {
+        LOGGER.info("Deleting movie {}", id);
+        movieRepository.deleteById(id);
+        LOGGER.info("Deleted movie {}", id);
+    }
 
-    //    Update single value, old version
+
+    //    Update single value, old version (need - else if to detect what prop. have object)
 //    public Movie createUpdateFavoriteMovie(CreateUpdateFavoriteMovieRequest request) {
 //        LOGGER.info("Creating favorite movie: {}", request );
 //        Movie movie = objectMapper.convertValue(request, Movie.class);
