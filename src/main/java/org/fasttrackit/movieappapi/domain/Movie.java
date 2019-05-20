@@ -1,11 +1,11 @@
 package org.fasttrackit.movieappapi.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Movie {
@@ -20,7 +20,22 @@ public class Movie {
     private double rating;
     private boolean favorite;
     private boolean watchlist;
-    private boolean playlist;
+
+    @ManyToMany(mappedBy = "movies")
+    private Set<Cart> carts = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id == movie.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public long getId() {
         return id;
@@ -62,12 +77,13 @@ public class Movie {
         this.watchlist = watchlist;
     }
 
-    public boolean isPlaylist() {
-        return playlist;
+    public Set<Cart> getCarts() {
+        return carts;
     }
 
-    public void setPlaylist(boolean playlist) {
-        this.playlist = playlist;
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
+
 
 }

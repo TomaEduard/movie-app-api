@@ -7,7 +7,6 @@ public class GetMovieRequest {
     private Double rating;
     private Boolean favorite;
     private Boolean watchlist;
-    private Boolean playlist;
 
     public long getId() {
         return id;
@@ -49,13 +48,6 @@ public class GetMovieRequest {
         this.watchlist = watchlist;
     }
 
-    public Boolean getPlaylist() {
-        return playlist;
-    }
-
-    public void setPlaylist(Boolean playlist) {
-        this.playlist = playlist;
-    }
 
     @Override
     public String toString() {
@@ -65,7 +57,6 @@ public class GetMovieRequest {
                 ", rating=" + rating +
                 ", favorite=" + favorite +
                 ", watchlist=" + watchlist +
-                ", playlist=" + playlist +
                 '}';
     }
 }

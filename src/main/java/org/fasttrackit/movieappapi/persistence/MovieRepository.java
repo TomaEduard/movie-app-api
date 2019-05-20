@@ -47,8 +47,6 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
     Page<Movie> findByNameContainingAndFavoriteTrueAndRatingGreaterThanEqualAndWatchlistTrue(
             String name, double rating, Pageable pageabe);
 
-//    Playlist
-    Page<Movie> findByPlaylistTrue(Pageable pageable);
 
 
 

@@ -14,8 +14,6 @@ public class CreateUpdateMovieRequest {
     private double rating;
     private boolean favorite;
     private boolean watchlist;
-    private boolean playlist;
-
 
     public long getId() {
         return id;
@@ -57,13 +55,6 @@ public class CreateUpdateMovieRequest {
         this.watchlist = watchlist;
     }
 
-    public boolean isPlaylist() {
-        return playlist;
-    }
-
-    public void setPlaylist(boolean playlist) {
-        this.playlist = playlist;
-    }
 
     @Override
     public String toString() {
@@ -73,7 +64,6 @@ public class CreateUpdateMovieRequest {
                 ", rating=" + rating +
                 ", favorite=" + favorite +
                 ", watchlist=" + watchlist +
-                ", playlist=" + playlist +
                 '}';
     }
 }

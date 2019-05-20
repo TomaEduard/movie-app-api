@@ -2,6 +2,7 @@ package org.fasttrackit.movieappapi;
 
 import org.fasttrackit.movieappapi.domain.Movie;
 import org.fasttrackit.movieappapi.service.MovieService;
+import org.fasttrackit.movieappapi.steps.MovieSteps;
 import org.fasttrackit.movieappapi.transfer.movie.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,26 +23,25 @@ public class MovieServiceIntegrationTests {
     @Autowired
     private MovieService movieService;
 
+    @Autowired
+    private MovieSteps movieSteps;
+
     //    Create Movie Method
-    private Movie createMovie() {
+    @Test
+    public void testCreateMovie_whenValidRequest_thenReturnProductWithId() {
         CreateUpdateMovieRequest request = new CreateUpdateMovieRequest();
         request.setId(299534);
-        request.setName("Agengers: Endgame");
+        request.setName("Avengers: Endgame");
         request.setRating(3.5);
         request.setFavorite(true);
         request.setWatchlist(true);
-        request.setPlaylist(true);
 
-        return movieService.createMovie(request);
-    }
-
-    @Test
-    public void testCreateProduct_whenValidRequest_thenReturnProductWithId() {
-        Movie movie = createMovie();
+        movieService.createMovie(request);
+//        Movie movie = movieSteps.createMovie();
 
         // Make sure the product does not have null values
-        assertThat(movie, notNullValue());
-        assertThat(movie.getId(), greaterThan(0L));
+//        assertThat(movie, notNullValue());
+//        assertThat(movie.getId(), greaterThan(0L));
     }
 
 //   Create or update exist movie
@@ -52,11 +52,10 @@ public class MovieServiceIntegrationTests {
         // Create db object
         CreateUpdateMovieRequest request = new CreateUpdateMovieRequest();
         request.setId(299534);
-        request.setName("Agengers: Endgame");
+        request.setName("Avengers: Endgame");
         request.setFavorite(false);
         request.setRating(5);
         request.setWatchlist(false);
-        request.setPlaylist(false);
 
         // Create service
         Movie createUpdateMovieRequest = movieService.createUpdateMovie(request);
@@ -74,11 +73,10 @@ public class MovieServiceIntegrationTests {
         // Create db object
         CreateUpdateMovieRequest request = new CreateUpdateMovieRequest();
         request.setId(299534);
-        request.setName("Agengers: Endgame");
+        request.setName("Avengers: Endgame");
         request.setFavorite(true);
         request.setRating(2);
         request.setWatchlist(true);
-        request.setPlaylist(true);
 
         // Create service
         movieService.createUpdateMovie(request);
@@ -92,27 +90,20 @@ public class MovieServiceIntegrationTests {
 //    Get Methods
     @Test
     public void testGetMovie_whenAllCriteriaProvidedAndMatching_thenReturnFilteredResults() throws Exception {
-        CreateUpdateMovieRequest createMovie = new CreateUpdateMovieRequest();
-        createMovie.setId(299534);
-        createMovie.setName("Agengers: Endgame");
-        createMovie.setRating(3.5);
-        createMovie.setFavorite(true);
-        createMovie.setWatchlist(true);
-        createMovie.setPlaylist(true);
-
-        movieService.createMovie(createMovie);
+        Movie movie = movieSteps.createMovie();
 
         GetMovieRequest request = new GetMovieRequest();
         request.setPartialName("Aven");
-        request.setFavorite(true);
-        request.setRating(3.5);
-        request.setWatchlist(true);
+//        request.setFavorite(true);
+//        request.setRating(1.0);
+//        request.setWatchlist(true);
 
         Page<Movie> movies = movieService.getMovies(request, PageRequest.of(0, 10));
 
         assertThat(movies.getTotalElements(), greaterThanOrEqualTo(1L));
     }
 
+    // todo: Implement more tests for update
 
 
 //    @Test
