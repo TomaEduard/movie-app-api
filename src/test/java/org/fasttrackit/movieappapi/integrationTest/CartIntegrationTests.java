@@ -1,4 +1,4 @@
-package org.fasttrackit.movieappapi;
+package org.fasttrackit.movieappapi.integrationTest;
 
 import org.fasttrackit.movieappapi.domain.Cart;
 import org.fasttrackit.movieappapi.domain.Customer;
@@ -36,12 +36,12 @@ public class CartIntegrationTests {
 
 	@Test
 	public void testAddMovieToCart_whenValidRequest_thanReturnCart() throws Exception {
-		Movie movie = movieSteps.createMovie();				// Create movie in db
-		Customer customer = customerSteps.createCustomer();	// Create customer in db
+		Movie movie = movieSteps.createMovie();				// cr8 movie in db
+		Customer customer = customerSteps.createCustomer();	// cr8 customer in db
 
 		// Create DTO
 		SaveCartRequest request = new SaveCartRequest();
-		request.setCustomerId(customer.getId());
+		request.setCustomerId(customer.getId());			// Add customer to cart
 		request.setMovieId(Collections.singleton(movie.getId()));
 
 		Cart cart = cartService.addMovieToCart(request);

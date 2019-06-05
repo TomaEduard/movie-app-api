@@ -1,6 +1,7 @@
-package org.fasttrackit.movieappapi;
+package org.fasttrackit.movieappapi.integrationTest;
 
 import org.fasttrackit.movieappapi.domain.Movie;
+import org.fasttrackit.movieappapi.exception.ResourceNotFoundException;
 import org.fasttrackit.movieappapi.service.MovieService;
 import org.fasttrackit.movieappapi.steps.MovieSteps;
 import org.fasttrackit.movieappapi.transfer.movie.*;
@@ -93,18 +94,17 @@ public class MovieServiceIntegrationTests {
         Movie movie = movieSteps.createMovie();
 
         GetMovieRequest request = new GetMovieRequest();
-        request.setPartialName("Aven");
-//        request.setFavorite(true);
+        request.setPartialName("test");
+        request.setFavorite(true);
 //        request.setRating(1.0);
 //        request.setWatchlist(true);
 
-        Page<Movie> movies = movieService.getMovies(request, PageRequest.of(0, 10));
+        Page<MovieResponse> movies = movieService.getMovies(request, PageRequest.of(0, 10));
 
         assertThat(movies.getTotalElements(), greaterThanOrEqualTo(1L));
     }
 
     // todo: Implement more tests for update
-
 
 //    @Test
 //    public void testCreateUpdateFavoriteMovie_thenReturnMovieWithId() {
@@ -121,5 +121,30 @@ public class MovieServiceIntegrationTests {
 //        movieService.createUpdateFavoriteMovie(request);
 //    }
 
+    @Test
+    public void testGetMovieFromId_whenValidRequest_thenReturnResponseWithoutCart() throws ResourceNotFoundException {
+        Movie movie = movieSteps.createMovie();
+
+        MovieResponse movieResponse = new MovieResponse();
+        movieResponse.setId(movie.getId());
+
+        movieService.getMovieWithoutCart(movieResponse.getId());
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,8 +14,8 @@ public class MovieSteps {
 
     public Movie createMovie() {
         CreateUpdateMovieRequest request = new CreateUpdateMovieRequest();
-        request.setId(299534);
-        request.setName("Avengers: Endgame");
+        request.setId(9999999);
+        request.setName("test");
         request.setRating(3.5);
         request.setFavorite(true);
         request.setWatchlist(true);

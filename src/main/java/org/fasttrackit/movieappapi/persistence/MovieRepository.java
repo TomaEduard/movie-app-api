@@ -13,7 +13,7 @@ public interface MovieRepository extends PagingAndSortingRepository<Movie, Long>
 //    Name
     Page<Movie> findByNameContaining(@NotNull @Size(min = 1, max = 300) String name, Pageable pageable);
 //    Name + Favorite
-    Page<Movie> findByNameContainingAndFavoriteIsTrue(String namme, Pageable pageable);
+    Page<Movie> findByNameContainingAndFavoriteTrue(String namme, Pageable pageable);
 //    Name + Rating
     Page<Movie> findByNameContainingAndRatingGreaterThanEqual(String name, double rating, Pageable pageable);
 //    Name + Watchlist
