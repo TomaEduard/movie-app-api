@@ -1,6 +1,6 @@
-# M.app (backend)
+# M.app (back-end)
 
-Didactic project that aims to use elementary things for the purpose of learning. This is the backend application and use Spring Boot for the following features (rate movie, favorite movie, watch movie, playlist, and so on ...) Below the Application sessions find the links attached to each component.
+Didactic project that aims to use elementary things for the purpose of learning. This is the back-end application and use Spring Boot for the following features (rate movie, favorite movie, watch movie, playlist, and so on ...) Below the Application sessions find the links attached to each component.
 
 ## Getting Started
 
