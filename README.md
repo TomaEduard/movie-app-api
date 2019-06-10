@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Application
 
-- [Frontend](https://github.com/TomaEduard/movie-web-app) - The web framework used
+- [Front-end](https://github.com/TomaEduard/movie-web-app) - The web framework used
 
 ## Built With
 
