@@ -1,12 +1,12 @@
 # M.app (backend)
 
-Didactic project that aims to use elementary things for the purpose of learning. This is the backend application and use Spring Boot for the following features (rate movie, favorite movie, watch movie, playlist, and so on ...) Below the deployment sessions find the links attached to each component.
+Didactic project that aims to use elementary things for the purpose of learning. This is the backend application and use Spring Boot for the following features (rate movie, favorite movie, watch movie, playlist, and so on ...) Below the Application sessions find the links attached to each component.
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Deployment
+## Application
 
 - [Frontend](https://github.com/TomaEduard/movie-web-app) - The web framework used
 
